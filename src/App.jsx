@@ -24,6 +24,18 @@ addItem() {
 
   this.setState({ inputText: "",items: newitems }); // this.stateを更新 
 
+  firestore
+.collection("memo")
+.add({
+text: this.state.inputText,
+date: d
+})
+.then((docRef) => {
+console.log("Document written with ID: ", docRef.id);
+})
+.catch((error) => {
+console.error("Error adding document: ", error);
+});
 
   
   }
@@ -38,4 +50,24 @@ render() {
      </Page>
 );
 }
+
+componentDidMount() {
+document.addEventListener("DOMContentLoaded", () => {
+firestore
+.collection("memo")
+.get()
+.then((snapshot) => {
+if (snapshot.empty) {
+console.log("no matching documents");
+}
+var items = [];
+snapshot.forEach((data) => {
+var item = data.data();
+items.push({ text: item.text, date: item.date.toDate() });
+});
+this.setState({ inputText: "", items: items });
+});
+});
+}
+
 }

@@ -12,6 +12,41 @@
   <script type="text/javascript" src="<%= htmlWebpackPlugin.options.externalJS[dep] %>"></script><% } %>
 <% for (var dep in htmlWebpackPlugin.options.externalCSS) { %>
   <link rel="stylesheet" type="text/css" href="<%= htmlWebpackPlugin.options.externalCSS[dep] %>"><% } %>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+ var firestore;
+
+ var onDeviceReady = function () {
+  var firebaseConfig = {
+    apiKey: "AIzaSyAYTu8qmpiU3SKAZ7_Hpq0BF33BxC05gCQ",
+    authDomain: "monaca-36e54.firebaseapp.com",
+    databaseURL: "https://monaca-36e54.firebaseio.com",
+    projectId: "monaca-36e54",
+    storageBucket: "monaca-36e54.appspot.com",
+    messagingSenderId: "759370115668",
+    appId: "1:759370115668:web:c212f86feb6792fc4f5bc1"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  firestore = firebase.firestore();
+};
+document.addEventListener(
+window.cordova ? "deviceready" : "DOMContentLoaded",
+onDeviceReady,
+false
+);
+
+</script>
+
 </head>
 <body>
   <div id="app"></div>
